@@ -858,7 +858,7 @@ const obj = new DatoRoutes()
 obj.misRutas()
 export const routes = obj.router
 
-//Construccion del index
-let title = '<h1>API Banco</h1><br>'
+//Construccion de pagina por defecto
+let title = '<h2>API RES Trenes></h2><br><hr>'
 let explicacion = '<p>Para más información: <a href="https://github.com/">Github</a></p>'
 let html = title + explicacion  
