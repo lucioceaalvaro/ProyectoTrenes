@@ -117,7 +117,7 @@ class DatoRoutes {
         }
         private crearLimpiador = async (req: Request, res: Response) => {
            
-            const {dni,nombre,telefono,sueldo,horas,idTren} = req.body
+            const {dni,nombre,telefono,sueldo,horas,tren} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "limpiador",
@@ -126,7 +126,7 @@ class DatoRoutes {
                 _telefono: telefono,
                 _sueldo: sueldo,
                 _horas:horas,
-                _tren:idTren
+                _tren:tren
             }
             const oSchema = new Empleado(dSchema)
             await oSchema.save()
@@ -408,7 +408,23 @@ class DatoRoutes {
             })
     
         }
-
+        private getclienteDNI = async (req: Request, res: Response) => {
+            const valor = req.params.valor
+            await db.conectarBD()
+            .then( async (mensaje) => {
+                console.log(mensaje)
+                const query  = await Clientes.aggregate([
+                    {
+                      $match:{"_dni" : valor}
+          
+                    }])
+                res.json(query)
+            })
+            .catch((mensaje) => {
+                res.send(mensaje)
+            })
+    
+        }
 
         private calcularSalario = async (req:Request, res:Response) => {
             try {
@@ -803,7 +819,7 @@ class DatoRoutes {
 
         this._router.get('/salarios/:valor', this.calcularSalario)
             
-        //this._router.get('/clientes/:valor', this.getclienteDNI)
+        this._router.get('/clientes/:valor', this.getclienteDNI)
         this._router.get('/empleado/:valor', this.getempleadoDNI)
         //this._router.get('/reserva/:valor', this.getreservaDNI)
         
@@ -859,6 +875,6 @@ obj.misRutas()
 export const routes = obj.router
 
 //Construccion de pagina por defecto
-let title = '<h2>API RES Trenes></h2><br><hr>'
-let explicacion = '<p>Para más información: <a href="https://github.com/">Github</a></p>'
+let title = '<h1>API-RES Trenes</h1><hr>Autor:Alvaro Lucio'
+let explicacion = '<p>Para más información: <a href="https://github.com/lucioceaalvaro/ProyectoTrenes">Repositorio Github</a></p>'
 let html = title + explicacion  

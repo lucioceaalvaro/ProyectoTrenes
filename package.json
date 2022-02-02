@@ -1,5 +1,5 @@
 {
-  "name": "APITren",
+  "name": "api-tren",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "start": "node ./build/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "AlvaroLucio-Villegas de Cea",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

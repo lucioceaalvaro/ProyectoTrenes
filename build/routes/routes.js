@@ -107,7 +107,7 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearLimpiador = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, nombre, telefono, sueldo, horas, idTren } = req.body;
+            const { dni, nombre, telefono, sueldo, horas, tren } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "limpiador",
@@ -116,7 +116,7 @@ class DatoRoutes {
                 _telefono: telefono,
                 _sueldo: sueldo,
                 _horas: horas,
-                _tren: idTren
+                _tren: tren
             };
             const oSchema = new empleado_1.Empleado(dSchema);
             yield oSchema.save()
@@ -353,6 +353,22 @@ class DatoRoutes {
                 .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
                 console.log(mensaje);
                 const query = yield empleado_1.Empleado.aggregate([
+                    {
+                        $match: { "_dni": valor }
+                    }
+                ]);
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+        });
+        this.getclienteDNI = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const valor = req.params.valor;
+            yield database_1.db.conectarBD()
+                .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
+                console.log(mensaje);
+                const query = yield clientes_1.Clientes.aggregate([
                     {
                         $match: { "_dni": valor }
                     }
@@ -651,7 +667,7 @@ class DatoRoutes {
         this._router.post('/crearTrenMercancias', this.crearTrenMercancias);
         //GET con ID 
         this._router.get('/salarios/:valor', this.calcularSalario);
-        //this._router.get('/clientes/:valor', this.getclienteDNI)
+        this._router.get('/clientes/:valor', this.getclienteDNI);
         this._router.get('/empleado/:valor', this.getempleadoDNI);
         //this._router.get('/reserva/:valor', this.getreservaDNI)
         //DELETE
@@ -691,6 +707,6 @@ const obj = new DatoRoutes();
 obj.misRutas();
 exports.routes = obj.router;
 //Construccion de pagina por defecto
-let title = '<h2>API RES Trenes></h2><br><hr>';
-let explicacion = '<p>Para más información: <a href="https://github.com/">Github</a></p>';
+let title = '<h1>API-RES Trenes</h1><hr>Autor:Alvaro Lucio';
+let explicacion = '<p>Para más información: <a href="https://github.com/lucioceaalvaro/ProyectoTrenes">Repositorio Github</a></p>';
 let html = title + explicacion;

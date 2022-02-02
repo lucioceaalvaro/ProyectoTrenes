@@ -32,7 +32,7 @@ const TrenSchema = new Schema({
         type: Number
     },
     _asiento:{
-        type:String
+        type: String
     }
     
 
