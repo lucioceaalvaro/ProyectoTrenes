@@ -253,7 +253,6 @@ class DatoRoutes {
                     _tren_id: tren_id,
                     _origen: busquedatren._origen,
                     _destino: busquedatren._destino,
-                    _precio: busquedatren._precio,
                     _fecha: new Date,
                     _kilometros: kilometros
                 };
@@ -379,6 +378,22 @@ class DatoRoutes {
                 res.send(mensaje);
             });
         });
+        this.getviajeID = (req, res) => __awaiter(this, void 0, void 0, function* () {
+            const valor = req.params.valor;
+            yield database_1.db.conectarBD()
+                .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
+                console.log(mensaje);
+                const query = yield viaje_1.Viaje.aggregate([
+                    {
+                        $match: { "_id": valor }
+                    }
+                ]);
+                res.json(query);
+            }))
+                .catch((mensaje) => {
+                res.send(mensaje);
+            });
+        });
         this.calcularSalario = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.db.conectarBD();
@@ -401,7 +416,7 @@ class DatoRoutes {
                 else if (query._tipoObjeto == "limpiador") {
                     tmpLimpiador = new limpiado_1.Limpiador(query._dni, query._nombre, query._telefono, query._sueldo, query.hora, query._tren);
                     let salario = Promise.resolve(tmpLimpiador.salario());
-                    res.send((yield salario).toString());
+                    res.json((yield salario).toString());
                 }
                 yield database_1.db.desconectarBD();
             }
@@ -667,6 +682,7 @@ class DatoRoutes {
         this._router.post('/crearTrenMercancias', this.crearTrenMercancias);
         //GET con ID 
         this._router.get('/salarios/:valor', this.calcularSalario);
+        this._router.get('/viaje/:valor', this.getviajeID);
         this._router.get('/clientes/:valor', this.getclienteDNI);
         this._router.get('/empleado/:valor', this.getempleadoDNI);
         //this._router.get('/reserva/:valor', this.getreservaDNI)
@@ -683,7 +699,7 @@ class DatoRoutes {
         this._router.put('/actualizarSalEmp/:dni/:salario', this.actualizarSalarioEmpleado);
         //Operario
         this._router.put('/actualizarTrenOpe/:dni/:idTren', this.actualizarTrenOperario);
-        this._router.put('/actualizarTrenOpe/:dni/:nViajes', this.actualizarViajesOperario);
+        this._router.put('/actualizarViajesOpe/:dni/:nViajes', this.actualizarViajesOperario);
         //Revisor
         this._router.put('/actualizarViajeHoras/:dni/:nViajes/:horas', this.actualizarViajesHorasRevisor);
         //Limpiador
