@@ -490,7 +490,7 @@ class DatoRoutes {
                     
                 )
                 let salario =Promise.resolve(tmpLimpiador.salario())
-                res.send((await salario).toString())
+                res.json((await salario).toString())
             }
             await db.desconectarBD()
             } catch (error) {
