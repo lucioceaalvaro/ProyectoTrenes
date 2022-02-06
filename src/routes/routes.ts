@@ -286,7 +286,6 @@ class DatoRoutes {
                             _tren_id: tren_id,
                             _origen:busquedatren._origen,
                             _destino:busquedatren._destino,
-                            _precio:busquedatren._precio,
                             _fecha:new Date,
                             _kilometros:kilometros
                         }
@@ -425,7 +424,24 @@ class DatoRoutes {
             })
     
         }
-
+        private getviajeID = async (req: Request, res: Response) => {
+            const valor = req.params.valor
+            await db.conectarBD()
+            .then( async (mensaje) => {
+                console.log(mensaje)
+                const query  = await Viaje.aggregate([
+                    {
+                      $match:{"_id" : valor}
+          
+                    }])
+                res.json(query)
+            })
+            .catch((mensaje) => {
+                res.send(mensaje)
+            })
+    
+        }
+        
         private calcularSalario = async (req:Request, res:Response) => {
             try {
             await db.conectarBD()
@@ -818,7 +834,7 @@ class DatoRoutes {
         //GET con ID 
 
         this._router.get('/salarios/:valor', this.calcularSalario)
-            
+        this._router.get('/viaje/:valor', this.getviajeID)
         this._router.get('/clientes/:valor', this.getclienteDNI)
         this._router.get('/empleado/:valor', this.getempleadoDNI)
         //this._router.get('/reserva/:valor', this.getreservaDNI)
@@ -840,7 +856,7 @@ class DatoRoutes {
 
             //Operario
             this._router.put('/actualizarTrenOpe/:dni/:idTren', this.actualizarTrenOperario)
-            this._router.put('/actualizarTrenOpe/:dni/:nViajes', this.actualizarViajesOperario)
+            this._router.put('/actualizarViajesOpe/:dni/:nViajes', this.actualizarViajesOperario)
 
             //Revisor
             this._router.put('/actualizarViajeHoras/:dni/:nViajes/:horas', this.actualizarViajesHorasRevisor)
