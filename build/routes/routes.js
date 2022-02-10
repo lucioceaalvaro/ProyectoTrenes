@@ -416,7 +416,7 @@ class DatoRoutes {
                 else if (query._tipoObjeto == "limpiador") {
                     tmpLimpiador = new limpiado_1.Limpiador(query._dni, query._nombre, query._telefono, query._sueldo, query.hora, query._tren);
                     let salario = Promise.resolve(tmpLimpiador.salario());
-                    res.json((yield salario).toString());
+                    res.send((yield salario).toString());
                 }
                 yield database_1.db.desconectarBD();
             }
