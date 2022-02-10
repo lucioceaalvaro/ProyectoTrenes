@@ -96,16 +96,16 @@ class DatoRoutes {
 
         private crearOperario = async (req: Request, res: Response) => {
            
-            const {dni,nombre,telefono,sueldo,tren,viajes} = req.body
+            const {_dni,_nombre,_telefono,_sueldo,_tren,_viajes} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "operario",
-                _dni: dni,
-                _nombre: nombre,     
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _tren: tren,
-                _viajes: viajes
+                _dni: _dni,
+                _nombre: _nombre,     
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _tren: _tren,
+                _viajes: _viajes
             }
             const oSchema = new Empleado(dSchema)
             await oSchema.save()
@@ -117,16 +117,16 @@ class DatoRoutes {
         }
         private crearLimpiador = async (req: Request, res: Response) => {
            
-            const {dni,nombre,telefono,sueldo,horas,tren} = req.body
+            const {_dni,_nombre,_telefono,_sueldo,_horas,_tren} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "limpiador",
-                _dni: dni,
-                _nombre: nombre,     
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _horas:horas,
-                _tren:tren
+                _dni: _dni,
+                _nombre: _nombre,     
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _horas:_horas,
+                _tren:_tren
             }
             const oSchema = new Empleado(dSchema)
             await oSchema.save()
@@ -138,16 +138,16 @@ class DatoRoutes {
         }
         private crearRevisor = async (req: Request, res: Response) => {
            
-            const {dni,nombre,telefono,sueldo,horas,viajes} = req.body
+            const {_dni,_nombre,_telefono,_sueldo,_horas,_viajes} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "revisor",
-                _dni: dni,
-                _nombre: nombre,     
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _horas:horas,
-                _viajes: viajes
+                _dni: _dni,
+                _nombre: _nombre,     
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _horas:_horas,
+                _viajes: _viajes
             }
             const oSchema = new Empleado(dSchema)
             await oSchema.save()
@@ -161,14 +161,14 @@ class DatoRoutes {
 
         private crearCliente = async (req: Request, res: Response) => {
            
-            const {dni,nombre,telefono,email} = req.body
+            const {_dni,_nombre,_telefono,_email} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "Operario",
-                _dni: dni,
-                _nombre: nombre,     
-                _telefono: telefono,
-                _email: email,
+                _dni: _dni,
+                _nombre: _nombre,     
+                _telefono: _telefono,
+                _email: _email,
                 
             }
             const oSchema = new Clientes(dSchema)
@@ -183,16 +183,16 @@ class DatoRoutes {
 
         private crearTrenPasajeros = async (req: Request, res: Response) => {
            
-            const {id,origen,destino,nPasajeros,nPlazas,precio} = req.body
+            const {_id,_origen,_destino,_nPasajeros,_nPlazas,_precio} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "pasajeros",
-                _id: id,
-                _origen: origen,     
-                _destino: destino,
-                _nPasajeros:nPasajeros,
-                _nPlazas:nPlazas,
-                _precio: precio
+                _id: _id,
+                _origen: _origen,     
+                _destino: _destino,
+                _nPasajeros:_nPasajeros,
+                _nPlazas:_nPlazas,
+                _precio: _precio
                 
             }
             const oSchema = new Viaje(dSchema)
@@ -205,15 +205,15 @@ class DatoRoutes {
         }
         private crearTrenMercancias = async (req: Request, res: Response) => {
            
-            const {id,origen,destino,carga,cantidad} = req.body
+            const {_id,_origen,_destino,_carga,_cantidad} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "mercancias",
-                _id: id,
-                _origen: origen,     
-                _destino: destino,
-                _tipoCarga:carga,
-                _kilosCarga:cantidad
+                _id: _id,
+                _origen: _origen,     
+                _destino: _destino,
+                _tipoCarga:_carga,
+                _kilosCarga:_cantidad
                 
             }
             const oSchema = new Viaje(dSchema)
@@ -227,21 +227,21 @@ class DatoRoutes {
 
 
         private crearBillete = async (req: Request, res: Response) => {
-            const { dni,idTren,Asiento,Precio} = req.body
+            const { _dni,_idTrenPasajeros,_asiento} = req.body
             await db.conectarBD()
             let dSchema:any
 
-               let busquedatren =await Viaje.findOne({_id:idTren})
+               let busquedatren =await Viaje.findOne({_id:_idTrenPasajeros})
                 //res.send(busquedatren)
                if(busquedatren._tipoObjeto=="pasajeros"){
-                     let busquedacli =await Clientes.findOne({_dni:dni})
+                     let busquedacli =await Clientes.findOne({_dni:_dni})
                      if(busquedacli){
                         dSchema={
-                            _dni:dni,
-                            _idTrenPasajeros:idTren,
+                            _dni:_dni,
+                            _idTrenPasajeros:_idTrenPasajeros,
                             _origen:busquedatren._origen,
                             _destino:busquedatren._destino,
-                            _asiento:Asiento,
+                            _asiento:_asiento,
                             _precio:busquedatren._precio,
                             _fecha:new Date
                         }
@@ -273,21 +273,21 @@ class DatoRoutes {
             await db.desconectarBD()
         }
         private crearRegistro = async (req: Request, res: Response) => {
-            const { id,tren_id,kilometros} = req.body
+            const { _id,_tren_id,_kilometros} = req.body
             await db.conectarBD()
             let dSchema:any
 
-               let busquedatren =await Viaje.findOne({_id:tren_id})
+               let busquedatren =await Viaje.findOne({_id:_tren_id})
                if(busquedatren._tipoObjeto=="mercancias"){
                      
                      
                         dSchema={
-                            _id: id,
-                            _tren_id: tren_id,
+                            _id: _id,
+                            _tren_id: _tren_id,
                             _origen:busquedatren._origen,
                             _destino:busquedatren._destino,
                             _fecha:new Date,
-                            _kilometros:kilometros
+                            _kilometros:_kilometros
                         }
                         
                      
@@ -341,10 +341,10 @@ class DatoRoutes {
         }
         //Trenes
         private deleteTrenes = async (req: Request, res: Response) => {
-            const { idTren } = req.params
+            const { _id } = req.params
             await db.conectarBD()
             await Viaje.findOneAndDelete(
-                    { _id: idTren}
+                    { _id: _id}
                 )
                 .then( (doc: any) => {
                         if (doc == null) {
@@ -391,7 +391,7 @@ class DatoRoutes {
         }
 
         private getempleadoDNI = async (req: Request, res: Response) => {
-            const valor = req.params.valor
+            const valor = req.params._dni
             await db.conectarBD()
             .then( async (mensaje) => {
                 console.log(mensaje)
@@ -408,7 +408,7 @@ class DatoRoutes {
     
         }
         private getclienteDNI = async (req: Request, res: Response) => {
-            const valor = req.params.valor
+            const valor = req.params._dni
             await db.conectarBD()
             .then( async (mensaje) => {
                 console.log(mensaje)
@@ -425,7 +425,7 @@ class DatoRoutes {
     
         }
         private getviajeID = async (req: Request, res: Response) => {
-            const valor = req.params.valor
+            const valor = req.params._id
             await db.conectarBD()
             .then( async (mensaje) => {
                 console.log(mensaje)
@@ -445,7 +445,7 @@ class DatoRoutes {
         private calcularSalario = async (req:Request, res:Response) => {
             try {
             await db.conectarBD()
-            const id =req.params.valor
+            const id =req.params._dni
             let tmpOperario :Operario
             let tmpRevisor :Revisor
             let tmpLimpiador :Limpiador
@@ -472,7 +472,7 @@ class DatoRoutes {
                     query._nombre,
                     query._telefono,
                     query._sueldo,
-                    query.horas,
+                    query._horas,
                     query._viajes
                     
                 )
@@ -485,7 +485,7 @@ class DatoRoutes {
                     query._nombre,
                     query._telefono,
                     query._sueldo,
-                    query.hora,
+                    query._hora,
                     query._tren
                     
                 )
@@ -501,8 +501,8 @@ class DatoRoutes {
         //UPDATE
         private actualizarTlfCliente = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const telefono = req.params.telefono
+            const dni = req.params._dni
+            const telefono = req.params._telefono
             await Clientes.findOneAndUpdate(
                 { _dni: dni },
                 {
@@ -517,8 +517,8 @@ class DatoRoutes {
         //Empleados
         private actualizarSalarioEmpleado = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const salario = req.params.salario
+            const dni = req.params._dni
+            const salario = req.params._sueldo
             await Empleado.findOneAndUpdate(
                 { _dni: dni },
                 {
@@ -533,8 +533,8 @@ class DatoRoutes {
         //Operario
         private actualizarTrenOperario = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const idTren = req.params.idTren
+            const dni = req.params._dni
+            const idTren = req.params._tren
             await Empleado.findOneAndUpdate(
                 { _dni: dni,
                   _tipoObjeto:"operario"
@@ -550,8 +550,8 @@ class DatoRoutes {
         }
         private actualizarViajesOperario = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const nViajes = req.params.nViajes
+            const dni = req.params._dni
+            const nViajes = req.params._viajes
             await Empleado.findOneAndUpdate(
                 { _dni: dni,
                   _tipoObjeto:"operario"
@@ -568,9 +568,9 @@ class DatoRoutes {
         //Revisor
         private actualizarViajesHorasRevisor = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const nViajes = req.params.nViajes
-            const horas = req.params.horas
+            const dni = req.params._dni
+            const nViajes = req.params._viajes
+            const horas = req.params._horas
 
             await Empleado.findOneAndUpdate(
                 { _dni: dni,
@@ -589,9 +589,9 @@ class DatoRoutes {
         //Limpiador
         private actualizarHorasTrenLimpiador = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const dni = req.params.dni
-            const idTren = req.params.idTren
-            const horas = req.params.horas
+            const dni = req.params._dni
+            const idTren = req.params._tren
+            const horas = req.params._horas
 
             await Empleado.findOneAndUpdate(
                 { _dni: dni,
@@ -611,8 +611,8 @@ class DatoRoutes {
         //Viajes
         private actualizarOrigenViajes = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const id = req.params.id
-            const origen = req.params.origen
+            const id = req.params._id
+            const origen = req.params._origen
             await Viaje.findOneAndUpdate(
                 { _id: id
                 },
@@ -627,8 +627,8 @@ class DatoRoutes {
         }
         private actualizarDestinoViajes = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const id = req.params.id
-            const destino = req.params.destino
+            const id = req.params._id
+            const destino = req.params._destino
             await Viaje.findOneAndUpdate(
                 { _id: id
                 },
@@ -646,9 +646,9 @@ class DatoRoutes {
         //Mercancias
         private actualizarCarga = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const id = req.params.id
-            const tipo = req.params.tipocarga
-            const cantidad = req.params.cantidad
+            const id = req.params._id
+            const tipo = req.params._tipoCarga
+            const cantidad = req.params._kilosCarga
             await Viaje.findOneAndUpdate(
                 { _id: id,
                     _tipoObjeto: "mercancias"
@@ -667,8 +667,8 @@ class DatoRoutes {
         //Pasajeros
         private actualizarPrecio = async (req: Request, res: Response) => {
             await db.conectarBD()
-            const id = req.params.id
-            const precio = req.params.precio
+            const id = req.params._id
+            const precio = req.params._precio
             
             await Viaje.findOneAndUpdate(
                 { _id: id,
@@ -833,46 +833,46 @@ class DatoRoutes {
 
         //GET con ID 
 
-        this._router.get('/salarios/:valor', this.calcularSalario)
-        this._router.get('/viaje/:valor', this.getviajeID)
-        this._router.get('/clientes/:valor', this.getclienteDNI)
-        this._router.get('/empleado/:valor', this.getempleadoDNI)
+        this._router.get('/salarios/:_dni', this.calcularSalario)
+        this._router.get('/viaje/:_id', this.getviajeID)
+        this._router.get('/clientes/:_dni', this.getclienteDNI)
+        this._router.get('/empleado/:_dni', this.getempleadoDNI)
         //this._router.get('/reserva/:valor', this.getreservaDNI)
         
 
         //DELETE
-         this._router.delete('/deleteCliente/:dni', this.deleteCliente)
-         this._router.delete('/deleteEmpleado/:dni', this.deleteEmpleados)
-         this._router.delete('/deleteTrenes/:idTren', this.deleteTrenes)
+         this._router.delete('/deleteCliente/:_dni', this.deleteCliente)
+         this._router.delete('/deleteEmpleado/:_dni', this.deleteEmpleados)
+         this._router.delete('/deleteTrenes/:_id', this.deleteTrenes)
          this._router.delete('/deleteBilletes/:dni', this.deleteBilletes)
          this._router.delete('/deleteRegistros/:id', this.deleteRegistros)
 
         //UPDATE
         //Cliente
-        this._router.put('/actualizarTlfCli/:dni/:telefono', this.actualizarTlfCliente)
+        this._router.put('/actualizarTlfCli/:_dni/:_telefono', this.actualizarTlfCliente)
 
         //Empleado
-        this._router.put('/actualizarSalEmp/:dni/:salario', this.actualizarSalarioEmpleado)
+        this._router.put('/actualizarSalEmp/:_dni/:_sueldo', this.actualizarSalarioEmpleado)
 
             //Operario
-            this._router.put('/actualizarTrenOpe/:dni/:idTren', this.actualizarTrenOperario)
-            this._router.put('/actualizarViajesOpe/:dni/:nViajes', this.actualizarViajesOperario)
+            this._router.put('/actualizarTrenOpe/:_dni/:_tren', this.actualizarTrenOperario)
+            this._router.put('/actualizarViajesOpe/:_dni/:_viajes', this.actualizarViajesOperario)
 
             //Revisor
-            this._router.put('/actualizarViajeHoras/:dni/:nViajes/:horas', this.actualizarViajesHorasRevisor)
+            this._router.put('/actualizarViajeHoras/:_dni/:_viajes/:_horas', this.actualizarViajesHorasRevisor)
 
             //Limpiador
-            this._router.put('/actualizarHorasTren/:dni/:horas/:idTren', this.actualizarHorasTrenLimpiador)
+            this._router.put('/actualizarHorasTren/:_dni/:_horas/:_tren', this.actualizarHorasTrenLimpiador)
         
         //Viajes
-        this._router.put('/actualizarOrigenViaje/:id/:origen', this.actualizarOrigenViajes)
-        this._router.put('/actualizarDestinoViaje/:id/:destino', this.actualizarDestinoViajes)
+        this._router.put('/actualizarOrigenViaje/:_id/:_origen', this.actualizarOrigenViajes)
+        this._router.put('/actualizarDestinoViaje/:_id/:_destino', this.actualizarDestinoViajes)
         
             //Mercancias
-            this._router.put('/actualizarCarga/:id/:tipocarga/:cantidad', this.actualizarCarga)
+            this._router.put('/actualizarCarga/:_id/:_tipoCarga/:_kilosCarga', this.actualizarCarga)
 
             //Pasajeros
-            this._router.put('/actualizarPrecio/:id/:precio', this.actualizarPrecio)
+            this._router.put('/actualizarPrecio/:_id/:_precio', this.actualizarPrecio)
 
         
         
