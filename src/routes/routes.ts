@@ -307,10 +307,10 @@ class DatoRoutes {
         //DELETE
         //Cliente
         private deleteCliente = async (req: Request, res: Response) => {
-            const { dni } = req.params
+            const { _dni } = req.params
             await db.conectarBD()
             await Clientes.findOneAndDelete(
-                    { _dni: dni}
+                    { _dni: _dni}
                 )
                 .then( (doc: any) => {
                         if (doc == null) {
@@ -324,10 +324,10 @@ class DatoRoutes {
         }
         //Empleados
         private deleteEmpleados = async (req: Request, res: Response) => {
-            const { dni } = req.params
+            const { _dni } = req.params
             await db.conectarBD()
             await Empleado.findOneAndDelete(
-                    { _dni: dni}
+                    { _dni: _dni}
                 )
                 .then( (doc: any) => {
                         if (doc == null) {
@@ -358,13 +358,13 @@ class DatoRoutes {
         }
         //Billetes
         private deleteBilletes = async (req: Request, res: Response) => {
-            const { dni } = req.params
+            const { _dni } = req.params
             await db.conectarBD()
             await Billetes.findOneAndDelete(
-                    { _dni: dni}
+                    { _dni: _dni}
                 )
                 .then( (doc: any) => {
-                        if (doc == null) {
+                        // if (doc == null) {
                             res.send(`No encontrado`)
                         }else {
                             res.send('Borrado correcto: '+ doc)
@@ -844,8 +844,8 @@ class DatoRoutes {
          this._router.delete('/deleteCliente/:_dni', this.deleteCliente)
          this._router.delete('/deleteEmpleado/:_dni', this.deleteEmpleados)
          this._router.delete('/deleteTrenes/:_id', this.deleteTrenes)
-         this._router.delete('/deleteBilletes/:dni', this.deleteBilletes)
-         this._router.delete('/deleteRegistros/:id', this.deleteRegistros)
+         this._router.delete('/deleteBilletes/:_dni', this.deleteBilletes)
+         this._router.delete('/deleteRegistros/:_id', this.deleteRegistros)
 
         //UPDATE
         //Cliente
