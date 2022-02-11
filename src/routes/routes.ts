@@ -164,7 +164,7 @@ class DatoRoutes {
             const {_dni,_nombre,_telefono,_email} = req.body
              await db.conectarBD()
             const dSchema = {               
-                _tipoObjeto: "Operario",
+                
                 _dni: _dni,
                 _nombre: _nombre,     
                 _telefono: _telefono,

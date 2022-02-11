@@ -88,16 +88,16 @@ class DatoRoutes {
             database_1.db.desconectarBD();
         });
         this.crearOperario = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, nombre, telefono, sueldo, tren, viajes } = req.body;
+            const { _dni, _nombre, _telefono, _sueldo, _tren, _viajes } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "operario",
-                _dni: dni,
-                _nombre: nombre,
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _tren: tren,
-                _viajes: viajes
+                _dni: _dni,
+                _nombre: _nombre,
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _tren: _tren,
+                _viajes: _viajes
             };
             const oSchema = new empleado_1.Empleado(dSchema);
             yield oSchema.save()
@@ -107,16 +107,16 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearLimpiador = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, nombre, telefono, sueldo, horas, tren } = req.body;
+            const { _dni, _nombre, _telefono, _sueldo, _horas, _tren } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "limpiador",
-                _dni: dni,
-                _nombre: nombre,
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _horas: horas,
-                _tren: tren
+                _dni: _dni,
+                _nombre: _nombre,
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _horas: _horas,
+                _tren: _tren
             };
             const oSchema = new empleado_1.Empleado(dSchema);
             yield oSchema.save()
@@ -126,16 +126,16 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearRevisor = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, nombre, telefono, sueldo, horas, viajes } = req.body;
+            const { _dni, _nombre, _telefono, _sueldo, _horas, _viajes } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "revisor",
-                _dni: dni,
-                _nombre: nombre,
-                _telefono: telefono,
-                _sueldo: sueldo,
-                _horas: horas,
-                _viajes: viajes
+                _dni: _dni,
+                _nombre: _nombre,
+                _telefono: _telefono,
+                _sueldo: _sueldo,
+                _horas: _horas,
+                _viajes: _viajes
             };
             const oSchema = new empleado_1.Empleado(dSchema);
             yield oSchema.save()
@@ -145,14 +145,13 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, nombre, telefono, email } = req.body;
+            const { _dni, _nombre, _telefono, _email } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
-                _tipoObjeto: "Operario",
-                _dni: dni,
-                _nombre: nombre,
-                _telefono: telefono,
-                _email: email,
+                _dni: _dni,
+                _nombre: _nombre,
+                _telefono: _telefono,
+                _email: _email,
             };
             const oSchema = new clientes_1.Clientes(dSchema);
             yield oSchema.save()
@@ -162,16 +161,16 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearTrenPasajeros = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, origen, destino, nPasajeros, nPlazas, precio } = req.body;
+            const { _id, _origen, _destino, _nPasajeros, _nPlazas, _precio } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "pasajeros",
-                _id: id,
-                _origen: origen,
-                _destino: destino,
-                _nPasajeros: nPasajeros,
-                _nPlazas: nPlazas,
-                _precio: precio
+                _id: _id,
+                _origen: _origen,
+                _destino: _destino,
+                _nPasajeros: _nPasajeros,
+                _nPlazas: _nPlazas,
+                _precio: _precio
             };
             const oSchema = new viaje_1.Viaje(dSchema);
             yield oSchema.save()
@@ -181,15 +180,15 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearTrenMercancias = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, origen, destino, carga, cantidad } = req.body;
+            const { _id, _origen, _destino, _carga, _cantidad } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "mercancias",
-                _id: id,
-                _origen: origen,
-                _destino: destino,
-                _tipoCarga: carga,
-                _kilosCarga: cantidad
+                _id: _id,
+                _origen: _origen,
+                _destino: _destino,
+                _tipoCarga: _carga,
+                _kilosCarga: _cantidad
             };
             const oSchema = new viaje_1.Viaje(dSchema);
             yield oSchema.save()
@@ -199,20 +198,20 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearBillete = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni, idTren, Asiento, Precio } = req.body;
+            const { _dni, _idTrenPasajeros, _asiento } = req.body;
             yield database_1.db.conectarBD();
             let dSchema;
-            let busquedatren = yield viaje_1.Viaje.findOne({ _id: idTren });
+            let busquedatren = yield viaje_1.Viaje.findOne({ _id: _idTrenPasajeros });
             //res.send(busquedatren)
             if (busquedatren._tipoObjeto == "pasajeros") {
-                let busquedacli = yield clientes_1.Clientes.findOne({ _dni: dni });
+                let busquedacli = yield clientes_1.Clientes.findOne({ _dni: _dni });
                 if (busquedacli) {
                     dSchema = {
-                        _dni: dni,
-                        _idTrenPasajeros: idTren,
+                        _dni: _dni,
+                        _idTrenPasajeros: _idTrenPasajeros,
                         _origen: busquedatren._origen,
                         _destino: busquedatren._destino,
-                        _asiento: Asiento,
+                        _asiento: _asiento,
                         _precio: busquedatren._precio,
                         _fecha: new Date
                     };
@@ -243,18 +242,18 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearRegistro = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id, tren_id, kilometros } = req.body;
+            const { _id, _tren_id, _kilometros } = req.body;
             yield database_1.db.conectarBD();
             let dSchema;
-            let busquedatren = yield viaje_1.Viaje.findOne({ _id: tren_id });
+            let busquedatren = yield viaje_1.Viaje.findOne({ _id: _tren_id });
             if (busquedatren._tipoObjeto == "mercancias") {
                 dSchema = {
-                    _id: id,
-                    _tren_id: tren_id,
+                    _id: _id,
+                    _tren_id: _tren_id,
                     _origen: busquedatren._origen,
                     _destino: busquedatren._destino,
                     _fecha: new Date,
-                    _kilometros: kilometros
+                    _kilometros: _kilometros
                 };
             }
             else {
@@ -301,9 +300,9 @@ class DatoRoutes {
         });
         //Trenes
         this.deleteTrenes = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { idTren } = req.params;
+            const { _id } = req.params;
             yield database_1.db.conectarBD();
-            yield viaje_1.Viaje.findOneAndDelete({ _id: idTren })
+            yield viaje_1.Viaje.findOneAndDelete({ _id: _id })
                 .then((doc) => {
                 if (doc == null) {
                     res.send(`No encontrado`);
@@ -347,7 +346,7 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.getempleadoDNI = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const valor = req.params.valor;
+            const valor = req.params._dni;
             yield database_1.db.conectarBD()
                 .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
                 console.log(mensaje);
@@ -363,7 +362,7 @@ class DatoRoutes {
             });
         });
         this.getclienteDNI = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const valor = req.params.valor;
+            const valor = req.params._dni;
             yield database_1.db.conectarBD()
                 .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
                 console.log(mensaje);
@@ -379,7 +378,7 @@ class DatoRoutes {
             });
         });
         this.getviajeID = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const valor = req.params.valor;
+            const valor = req.params._id;
             yield database_1.db.conectarBD()
                 .then((mensaje) => __awaiter(this, void 0, void 0, function* () {
                 console.log(mensaje);
@@ -397,7 +396,7 @@ class DatoRoutes {
         this.calcularSalario = (req, res) => __awaiter(this, void 0, void 0, function* () {
             try {
                 yield database_1.db.conectarBD();
-                const id = req.params.valor;
+                const id = req.params._dni;
                 let tmpOperario;
                 let tmpRevisor;
                 let tmpLimpiador;
@@ -409,12 +408,12 @@ class DatoRoutes {
                     res.send((yield salario).toString());
                 }
                 else if (query._tipoObjeto == "revisor") {
-                    tmpRevisor = new revisor_1.Revisor(query._dni, query._nombre, query._telefono, query._sueldo, query.horas, query._viajes);
+                    tmpRevisor = new revisor_1.Revisor(query._dni, query._nombre, query._telefono, query._sueldo, query._horas, query._viajes);
                     let salario = tmpRevisor.salario().toString();
                     res.send(salario);
                 }
                 else if (query._tipoObjeto == "limpiador") {
-                    tmpLimpiador = new limpiado_1.Limpiador(query._dni, query._nombre, query._telefono, query._sueldo, query.hora, query._tren);
+                    tmpLimpiador = new limpiado_1.Limpiador(query._dni, query._nombre, query._telefono, query._sueldo, query._hora, query._tren);
                     let salario = Promise.resolve(tmpLimpiador.salario());
                     res.send((yield salario).toString());
                 }
@@ -427,8 +426,8 @@ class DatoRoutes {
         //UPDATE
         this.actualizarTlfCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const telefono = req.params.telefono;
+            const dni = req.params._dni;
+            const telefono = req.params._telefono;
             yield clientes_1.Clientes.findOneAndUpdate({ _dni: dni }, {
                 _telefono: telefono
             })
@@ -439,8 +438,8 @@ class DatoRoutes {
         //Empleados
         this.actualizarSalarioEmpleado = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const salario = req.params.salario;
+            const dni = req.params._dni;
+            const salario = req.params._sueldo;
             yield empleado_1.Empleado.findOneAndUpdate({ _dni: dni }, {
                 _sueldo: salario
             })
@@ -451,8 +450,8 @@ class DatoRoutes {
         //Operario
         this.actualizarTrenOperario = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const idTren = req.params.idTren;
+            const dni = req.params._dni;
+            const idTren = req.params._tren;
             yield empleado_1.Empleado.findOneAndUpdate({ _dni: dni,
                 _tipoObjeto: "operario"
             }, {
@@ -464,8 +463,8 @@ class DatoRoutes {
         });
         this.actualizarViajesOperario = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const nViajes = req.params.nViajes;
+            const dni = req.params._dni;
+            const nViajes = req.params._viajes;
             yield empleado_1.Empleado.findOneAndUpdate({ _dni: dni,
                 _tipoObjeto: "operario"
             }, {
@@ -478,9 +477,9 @@ class DatoRoutes {
         //Revisor
         this.actualizarViajesHorasRevisor = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const nViajes = req.params.nViajes;
-            const horas = req.params.horas;
+            const dni = req.params._dni;
+            const nViajes = req.params._viajes;
+            const horas = req.params._horas;
             yield empleado_1.Empleado.findOneAndUpdate({ _dni: dni,
                 _tipoObjeto: "revisor"
             }, {
@@ -494,9 +493,9 @@ class DatoRoutes {
         //Limpiador
         this.actualizarHorasTrenLimpiador = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const dni = req.params.dni;
-            const idTren = req.params.idTren;
-            const horas = req.params.horas;
+            const dni = req.params._dni;
+            const idTren = req.params._tren;
+            const horas = req.params._horas;
             yield empleado_1.Empleado.findOneAndUpdate({ _dni: dni,
                 _tipoObjeto: "limpiador"
             }, {
@@ -510,8 +509,8 @@ class DatoRoutes {
         //Viajes
         this.actualizarOrigenViajes = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const id = req.params.id;
-            const origen = req.params.origen;
+            const id = req.params._id;
+            const origen = req.params._origen;
             yield viaje_1.Viaje.findOneAndUpdate({ _id: id
             }, {
                 _origen: origen
@@ -522,8 +521,8 @@ class DatoRoutes {
         });
         this.actualizarDestinoViajes = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const id = req.params.id;
-            const destino = req.params.destino;
+            const id = req.params._id;
+            const destino = req.params._destino;
             yield viaje_1.Viaje.findOneAndUpdate({ _id: id
             }, {
                 _destino: destino
@@ -535,9 +534,9 @@ class DatoRoutes {
         //Mercancias
         this.actualizarCarga = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const id = req.params.id;
-            const tipo = req.params.tipocarga;
-            const cantidad = req.params.cantidad;
+            const id = req.params._id;
+            const tipo = req.params._tipoCarga;
+            const cantidad = req.params._kilosCarga;
             yield viaje_1.Viaje.findOneAndUpdate({ _id: id,
                 _tipoObjeto: "mercancias"
             }, {
@@ -551,8 +550,8 @@ class DatoRoutes {
         //Pasajeros
         this.actualizarPrecio = (req, res) => __awaiter(this, void 0, void 0, function* () {
             yield database_1.db.conectarBD();
-            const id = req.params.id;
-            const precio = req.params.precio;
+            const id = req.params._id;
+            const precio = req.params._precio;
             yield viaje_1.Viaje.findOneAndUpdate({ _id: id,
                 _tipoObjeto: "pasajeros"
             }, {
@@ -681,36 +680,36 @@ class DatoRoutes {
         this._router.post('/crearTrenPasajeros', this.crearTrenPasajeros);
         this._router.post('/crearTrenMercancias', this.crearTrenMercancias);
         //GET con ID 
-        this._router.get('/salarios/:valor', this.calcularSalario);
-        this._router.get('/viaje/:valor', this.getviajeID);
-        this._router.get('/clientes/:valor', this.getclienteDNI);
-        this._router.get('/empleado/:valor', this.getempleadoDNI);
+        this._router.get('/salarios/:_dni', this.calcularSalario);
+        this._router.get('/viaje/:_id', this.getviajeID);
+        this._router.get('/clientes/:_dni', this.getclienteDNI);
+        this._router.get('/empleado/:_dni', this.getempleadoDNI);
         //this._router.get('/reserva/:valor', this.getreservaDNI)
         //DELETE
-        this._router.delete('/deleteCliente/:dni', this.deleteCliente);
-        this._router.delete('/deleteEmpleado/:dni', this.deleteEmpleados);
-        this._router.delete('/deleteTrenes/:idTren', this.deleteTrenes);
+        this._router.delete('/deleteCliente/:_dni', this.deleteCliente);
+        this._router.delete('/deleteEmpleado/:_dni', this.deleteEmpleados);
+        this._router.delete('/deleteTrenes/:_id', this.deleteTrenes);
         this._router.delete('/deleteBilletes/:dni', this.deleteBilletes);
         this._router.delete('/deleteRegistros/:id', this.deleteRegistros);
         //UPDATE
         //Cliente
-        this._router.put('/actualizarTlfCli/:dni/:telefono', this.actualizarTlfCliente);
+        this._router.put('/actualizarTlfCli/:_dni/:_telefono', this.actualizarTlfCliente);
         //Empleado
-        this._router.put('/actualizarSalEmp/:dni/:salario', this.actualizarSalarioEmpleado);
+        this._router.put('/actualizarSalEmp/:_dni/:_sueldo', this.actualizarSalarioEmpleado);
         //Operario
-        this._router.put('/actualizarTrenOpe/:dni/:idTren', this.actualizarTrenOperario);
-        this._router.put('/actualizarViajesOpe/:dni/:nViajes', this.actualizarViajesOperario);
+        this._router.put('/actualizarTrenOpe/:_dni/:_tren', this.actualizarTrenOperario);
+        this._router.put('/actualizarViajesOpe/:_dni/:_viajes', this.actualizarViajesOperario);
         //Revisor
-        this._router.put('/actualizarViajeHoras/:dni/:nViajes/:horas', this.actualizarViajesHorasRevisor);
+        this._router.put('/actualizarViajeHoras/:_dni/:_viajes/:_horas', this.actualizarViajesHorasRevisor);
         //Limpiador
-        this._router.put('/actualizarHorasTren/:dni/:horas/:idTren', this.actualizarHorasTrenLimpiador);
+        this._router.put('/actualizarHorasTren/:_dni/:_horas/:_tren', this.actualizarHorasTrenLimpiador);
         //Viajes
-        this._router.put('/actualizarOrigenViaje/:id/:origen', this.actualizarOrigenViajes);
-        this._router.put('/actualizarDestinoViaje/:id/:destino', this.actualizarDestinoViajes);
+        this._router.put('/actualizarOrigenViaje/:_id/:_origen', this.actualizarOrigenViajes);
+        this._router.put('/actualizarDestinoViaje/:_id/:_destino', this.actualizarDestinoViajes);
         //Mercancias
-        this._router.put('/actualizarCarga/:id/:tipocarga/:cantidad', this.actualizarCarga);
+        this._router.put('/actualizarCarga/:_id/:_tipoCarga/:_kilosCarga', this.actualizarCarga);
         //Pasajeros
-        this._router.put('/actualizarPrecio/:id/:precio', this.actualizarPrecio);
+        this._router.put('/actualizarPrecio/:_id/:_precio', this.actualizarPrecio);
         // this._router.get('/buscar/:id', this.buscarComercial)
         // this._router.put('/actualizar/:id/:comercial', this.actualizarCliente)
         // this._router.delete('/borrar/:id', this.borrarCliente)
