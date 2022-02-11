@@ -205,15 +205,15 @@ class DatoRoutes {
         }
         private crearTrenMercancias = async (req: Request, res: Response) => {
            
-            const {_id,_origen,_destino,_carga,_cantidad} = req.body
+            const {_id,_origen,_destino,_tipoCarga,_kilosCarga} = req.body
              await db.conectarBD()
             const dSchema = {               
                 _tipoObjeto: "mercancias",
                 _id: _id,
                 _origen: _origen,     
                 _destino: _destino,
-                _tipoCarga:_carga,
-                _kilosCarga:_cantidad
+                _tipoCarga:_tipoCarga,
+                _kilosCarga:_kilosCarga
                 
             }
             const oSchema = new Viaje(dSchema)
@@ -364,7 +364,7 @@ class DatoRoutes {
                     { _dni: _dni}
                 )
                 .then( (doc: any) => {
-                        // if (doc == null) {
+                        if (doc == null) {
                             res.send(`No encontrado`)
                         }else {
                             res.send('Borrado correcto: '+ doc)
