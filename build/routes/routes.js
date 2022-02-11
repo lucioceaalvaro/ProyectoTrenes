@@ -180,15 +180,15 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.crearTrenMercancias = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { _id, _origen, _destino, _carga, _cantidad } = req.body;
+            const { _id, _origen, _destino, _tipoCarga, _kilosCarga } = req.body;
             yield database_1.db.conectarBD();
             const dSchema = {
                 _tipoObjeto: "mercancias",
                 _id: _id,
                 _origen: _origen,
                 _destino: _destino,
-                _tipoCarga: _carga,
-                _kilosCarga: _cantidad
+                _tipoCarga: _tipoCarga,
+                _kilosCarga: _kilosCarga
             };
             const oSchema = new viaje_1.Viaje(dSchema);
             yield oSchema.save()
@@ -268,9 +268,9 @@ class DatoRoutes {
         //DELETE
         //Cliente
         this.deleteCliente = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni } = req.params;
+            const { _dni } = req.params;
             yield database_1.db.conectarBD();
-            yield clientes_1.Clientes.findOneAndDelete({ _dni: dni })
+            yield clientes_1.Clientes.findOneAndDelete({ _dni: _dni })
                 .then((doc) => {
                 if (doc == null) {
                     res.send(`No encontrado`);
@@ -284,9 +284,9 @@ class DatoRoutes {
         });
         //Empleados
         this.deleteEmpleados = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni } = req.params;
+            const { _dni } = req.params;
             yield database_1.db.conectarBD();
-            yield empleado_1.Empleado.findOneAndDelete({ _dni: dni })
+            yield empleado_1.Empleado.findOneAndDelete({ _dni: _dni })
                 .then((doc) => {
                 if (doc == null) {
                     res.send(`No encontrado`);
@@ -316,9 +316,9 @@ class DatoRoutes {
         });
         //Billetes
         this.deleteBilletes = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { dni } = req.params;
+            const { _dni } = req.params;
             yield database_1.db.conectarBD();
-            yield billetes_1.Billetes.findOneAndDelete({ _dni: dni })
+            yield billetes_1.Billetes.findOneAndDelete({ _dni: _dni })
                 .then((doc) => {
                 if (doc == null) {
                     res.send(`No encontrado`);
@@ -689,8 +689,8 @@ class DatoRoutes {
         this._router.delete('/deleteCliente/:_dni', this.deleteCliente);
         this._router.delete('/deleteEmpleado/:_dni', this.deleteEmpleados);
         this._router.delete('/deleteTrenes/:_id', this.deleteTrenes);
-        this._router.delete('/deleteBilletes/:dni', this.deleteBilletes);
-        this._router.delete('/deleteRegistros/:id', this.deleteRegistros);
+        this._router.delete('/deleteBilletes/:_dni', this.deleteBilletes);
+        this._router.delete('/deleteRegistros/:_id', this.deleteRegistros);
         //UPDATE
         //Cliente
         this._router.put('/actualizarTlfCli/:_dni/:_telefono', this.actualizarTlfCliente);
