@@ -19,6 +19,12 @@ const RegistroSchema = new mongoose_1.Schema({
     _fecha: {
         type: Date
     },
+    _tipoCarga: {
+        type: String
+    },
+    _kilosCarga: {
+        type: Number
+    },
     _kilometros: {
         type: Number
     }
