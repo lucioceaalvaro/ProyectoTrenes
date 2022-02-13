@@ -360,10 +360,10 @@ class DatoRoutes {
             await db.desconectarBD()
         }
         private deleteRegistros = async (req: Request, res: Response) => {
-            const { id } = req.params
+            const { _id } = req.params
             await db.conectarBD()
             await Registros.findOneAndDelete(
-                    { _id: id}
+                    { _id: _id}
                 )
                 .then( (doc: any) => {
                         if (doc == null) {
