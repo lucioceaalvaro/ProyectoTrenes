@@ -271,6 +271,8 @@ class DatoRoutes {
                             _origen:busquedatren._origen,
                             _destino:busquedatren._destino,
                             _fecha:new Date,
+                            _tipoCarga:busquedatren._tipoCarga,
+                            _kilosCarga:busquedatren._kilosCarga,
                             _kilometros:_kilometros
                         }
                         
