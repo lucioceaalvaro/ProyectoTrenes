@@ -320,9 +320,9 @@ class DatoRoutes {
             yield database_1.db.desconectarBD();
         });
         this.deleteRegistros = (req, res) => __awaiter(this, void 0, void 0, function* () {
-            const { id } = req.params;
+            const { _id } = req.params;
             yield database_1.db.conectarBD();
-            yield registro_1.Registros.findOneAndDelete({ _id: id })
+            yield registro_1.Registros.findOneAndDelete({ _id: _id })
                 .then((doc) => {
                 if (doc == null) {
                     res.send(`No encontrado`);
