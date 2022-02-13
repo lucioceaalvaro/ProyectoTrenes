@@ -93,7 +93,7 @@ class DatoRoutes {
             db.desconectarBD()
         }
 
-
+        //POST
         private crearOperario = async (req: Request, res: Response) => {
            
             const {_dni,_nombre,_telefono,_sueldo,_tren,_viajes} = req.body
@@ -157,8 +157,6 @@ class DatoRoutes {
     
             await db.desconectarBD()
         }
-
-
         private crearCliente = async (req: Request, res: Response) => {
            
             const {_dni,_nombre,_telefono,_email} = req.body
@@ -179,8 +177,7 @@ class DatoRoutes {
     
             await db.desconectarBD()
         }
-
-
+        //Viaje
         private crearTrenPasajeros = async (req: Request, res: Response) => {
            
             const {_id,_origen,_destino,_nPasajeros,_nPlazas,_precio} = req.body
@@ -245,26 +242,13 @@ class DatoRoutes {
                             _precio:busquedatren._precio,
                             _fecha:new Date
                         }
-                        // const oSchema = new Viaje(dSchema)
-                        // await oSchema.save()
+                        
                      }
                }else{
                    res.send("Ese tren no es de pasajeros")
                }
                 
-                    //CONTADOR DE PLAZAS 
-                    // let tren=await Tren.fin
-                    // let contadorAsi=await Tren.findOneAndUpdate(
-                    //     {_id: idTren},
-                    //     {
-                    //         _tipoObjeto: "Pasajeros",
-                    //         _id:id,
-                    //         _origen:origen,
-                    //          _destino:destino,
-                    //         _nPasajeros:nPasajeros,
-                    //          _precio:precio
-                    //     }
-                    // )
+                    
 
             const oSchema = new Billetes(dSchema)
             await oSchema.save()
@@ -389,7 +373,7 @@ class DatoRoutes {
                 .catch( (err: any) => res.send('Error: '+ err)) 
             await db.desconectarBD()
         }
-
+        //Consulta selecta
         private getempleadoDNI = async (req: Request, res: Response) => {
             const valor = req.params._dni
             await db.conectarBD()
@@ -689,120 +673,7 @@ class DatoRoutes {
 
         
 
-        // private calcularSalario = async (req: Request, res: Response) => {
-        //     await db.conectarBD()
-
-        //     const id = req.params.id
-        //     let tmpEmpleado: Empleado
-        //     const query = await Emp.findOne({ _id: id })
-            
-        //     if (query._tipoObjeto == "Directivo") {
-        //         tmpEmpleado = new Directivo(query._id,
-        //             query._nombre,
-        //             query._telefono,
-        //             query._direccion,
-        //             query._iban,
-        //             query._sueldo,
-        //             query._fecha,
-        //             query._nivel)
-        //         let salario = tmpEmpleado.salario().toString()
-        //         res.send(salario)
-
-        //     } else if (query._tipoObjeto == "Limpiador") {
-        //         tmpEmpleado = new Limpiador(query._id,
-        //             query._nombre,
-        //             query._telefono,
-        //             query._direccion,
-        //             query._iban,
-        //             query._sueldo,
-        //             query._fecha,
-        //             query._empresa)
-        //         let salario = tmpEmpleado.salario().toString()
-        //         res.send(salario)
-
-        //     } else if (query._tipoObjeto == "Comercial") {
-        //         tmpEmpleado = new Comercial(query._id,
-        //             query._nombre,
-        //             query._telefono,
-        //             query._direccion,
-        //             query._iban,
-        //             query._sueldo,
-        //             query._fecha,
-        //             query._horas)
-        //         let salario = tmpEmpleado.salario().toString()
-        //         res.send(salario)
-        //     }
-        //     await db.desconectarBD()
-        // }
-
         
-
-        
-
-        // private crearPrestamo = async (req: Request, res: Response) => {
-        //     await db.conectarBD()
-
-        //     const dniCli = req.params.id
-        //     const prestamo = parseInt(req.params.prestamo)
-        //     let tmpCliente: Cliente
-        //     let dCliente: tCliente2
-        //     let interes: number
-        //     let fecha: Date = new Date()
-        //     let plazo: Date
-        //     let query: any = await Cli.find({ _id: dniCli })
-
-        //     let sSchema: any
-        //     let sSchemaReg: tRegistro = {
-        //         _idComercial: null,
-        //         _idCliente: null,
-        //         _capitalCliente: null,
-        //         _prestamo: null,
-        //         _interes: null,
-        //         _plazo: null,
-        //     }
-
-        //     for (dCliente of query) {
-        //         if (dCliente._tipoObjeto == "Personal") {
-        //             tmpCliente = new Persona(dCliente._id,
-        //                                     dCliente._nombre,
-        //                                     dCliente._telefono,
-        //                                     dCliente._direccion,
-        //                                     dCliente._capital,
-        //                                     dCliente._ingresos,
-        //                                     dCliente._comercial)
-
-        //             if (prestamo < 10000) {
-        //                 interes = 0.05
-        //                 fecha.setMonth(fecha.getMonth() + 6)
-        //                 plazo = fecha
-
-        //             } else if (prestamo < 50000) {
-        //                 interes = 0.07
-        //                 fecha.setFullYear(fecha.getFullYear() + 2)
-        //                 plazo = fecha
-
-        //             } else {
-        //                 interes = 0.09
-        //                 fecha.setFullYear(fecha.getFullYear() + 10)
-        //                 plazo = fecha
-        //             }
-
-        //             sSchemaReg._idComercial = dCliente._comercial
-        //             sSchemaReg._idCliente = dCliente._id
-        //             sSchemaReg._capitalCliente = dCliente._capital
-        //             sSchemaReg._prestamo = prestamo
-        //             sSchemaReg._interes = interes
-        //             sSchemaReg._plazo = plazo
-
-        //             sSchema = new Reg(sSchemaReg)
-        //             await sSchema.save()
-        //             .then((doc: any) => res.send('Has guardado el archivo:\n' + doc))
-        //             .catch((err: any) => res.send('Error: ' + err))
-        //             }
-        //     }
-
-        //     await db.desconectarBD()
-        // }
 
     misRutas() {
         this._router.get('/', this.index)
@@ -816,11 +687,8 @@ class DatoRoutes {
         this._router.get('/billetes', this.getBilletes)
         this._router.get('/registro', this.getRegistros)
 
-
-
         //POST 
-
-        
+       
         this._router.post('/crearOperario', this.crearOperario)
         this._router.post('/crearLimpiador', this.crearLimpiador)
         this._router.post('/crearRevisor', this.crearRevisor)
@@ -837,7 +705,7 @@ class DatoRoutes {
         this._router.get('/viaje/:_id', this.getviajeID)
         this._router.get('/clientes/:_dni', this.getclienteDNI)
         this._router.get('/empleado/:_dni', this.getempleadoDNI)
-        //this._router.get('/reserva/:valor', this.getreservaDNI)
+        
         
 
         //DELETE
@@ -876,12 +744,7 @@ class DatoRoutes {
 
         
         
-        // this._router.get('/buscar/:id', this.buscarComercial)
-        // this._router.put('/actualizar/:id/:comercial', this.actualizarCliente)
-        // this._router.delete('/borrar/:id', this.borrarCliente)
-        // this._router.post('/salario/:id', this.calcularSalario)
-        // this._router.post('/renta/:id', this.calcularRenta)
-        // this._router.post('/ganancia/:id', this.mediaGanancia)
+        
         
     }
 }
