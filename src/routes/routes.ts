@@ -259,13 +259,13 @@ class DatoRoutes {
         private crearRegistro = async (req: Request, res: Response) => {
             const { _id,_tren_id,_kilometros} = req.body
             await db.conectarBD()
-            let dSchema:any
+            let dSchema
 
                let busquedatren =await Viaje.findOne({_id:_tren_id})
                if(busquedatren._tipoObjeto=="mercancias"){
                      
                      
-                        dSchema={
+                        dSchema = {
                             _id: _id,
                             _tren_id: _tren_id,
                             _origen:busquedatren._origen,
